@@ -12,7 +12,7 @@ A partially working version of a ping pong game with:
 - Ball movement with basic collision
 - Score display
 
-You are expected to **analyze**, **interact with an AI assistant**, and **complete/fix** the game to make it fully functional. 
+You are expected to **analyze**, **interact with an AI assistant**, and **complete/fix** the game to make it fully functional.
 
 ### **Use ChatGPT as the LLM for vibecoding in this Lab.**
 
@@ -125,13 +125,14 @@ pygame-pingpong/
 
 ## Submission Checklist
 
-- [] All 4 tasks completed
-- [] Game behaves as expected
-- [] No bugs or crashes
-- [] Code reviewed with LLM
-- [] Final score and winner display works correctly
-- [] Score appears correctly on both player and AI sides
-- [] Dependencies listed in `requirements.txt`
-- [] README is followed during setup and testing
-- [] Codebase is clean, modular, and understandable
-- [] Submission should include the Chat/LLM used Page link with the complete chat history.
+- [X] All 4 tasks completed
+- [X] Game behaves as expected
+- [X] No bugs or crashes
+- [X] Code reviewed with LLM
+- [X] Final score and winner display works correctly
+- [X] Score appears correctly on both player and AI sides
+- [X] Dependencies listed in `requirements.txt`
+- [X] README is followed during setup and testing
+- [X] Codebase is clean, modular, and understandable
+- [X] Submission should include the Chat/LLM used Page link with the complete chat history.<br />
+[https://chatgpt.com/share/68f384be-b380-8013-ba6d-d2fe39e7e3db](https://chatgpt.com/share/68f384be-b380-8013-ba6d-d2fe39e7e3db)
