@@ -4,6 +4,9 @@ from game.game_engine import GameEngine
 # Initialize pygame/Start application
 pygame.init()
 
+# Initialize mixer before loading sounds
+pygame.mixer.init()
+
 # Screen dimensions
 WIDTH, HEIGHT = 800, 600
 SCREEN = pygame.display.set_mode((WIDTH, HEIGHT))

@@ -1,13 +1,15 @@
 import pygame
 import random
+import os
 
-# Initialize mixer before loading sounds
-pygame.mixer.init()
-
-# Load sound effects (make sure these .wav files are in your project directory)
-paddle_hit_sound = pygame.mixer.Sound("./assets/sounds/paddle_hit.wav")
-wall_bounce_sound = pygame.mixer.Sound("./assets/sounds/wall_bounce.wav")
-score_sound = pygame.mixer.Sound("./assets/sounds/score.wav")
+# Load sound effects
+paddle_hit_sound = pygame.mixer.Sound(
+    os.path.join("assets", "sounds", "paddle_hit.wav")
+)
+wall_bounce_sound = pygame.mixer.Sound(
+    os.path.join("assets", "sounds", "wall_bounce.wav")
+)
+score_sound = pygame.mixer.Sound(os.path.join("assets", "sounds", "score.wav"))
 
 
 class Ball:
