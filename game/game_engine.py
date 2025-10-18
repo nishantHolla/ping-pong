@@ -1,3 +1,4 @@
+import os
 import pygame
 from .paddle import Paddle
 from .ball import Ball
@@ -26,6 +27,16 @@ class GameEngine:
         self.ai_score = 0
         self.font = pygame.font.SysFont("Arial", 30)
         self.target_score = 5
+        # Load sound effects
+        self.paddle_hit_sound = pygame.mixer.Sound(
+            os.path.join("assets", "sounds", "paddle_hit.wav")
+        )
+        self.wall_bounce_sound = pygame.mixer.Sound(
+            os.path.join("assets", "sounds", "wall_bounce.wav")
+        )
+        self.score_sound = pygame.mixer.Sound(
+            os.path.join("assets", "sounds", "score.wav")
+        )
 
     def handle_input(self):
         keys = pygame.key.get_pressed()
@@ -35,14 +46,19 @@ class GameEngine:
             self.player.move(10, self.height)
 
     def update(self):
-        self.ball.move(self.player, self.ai)
+        self.ball.move(
+            self.player,
+            self.ai,
+            wall_bounce_sound=self.wall_bounce_sound,
+            paddle_hit_sound=self.paddle_hit_sound,
+        )
 
         if self.ball.x <= 0:
             self.ai_score += 1
-            self.ball.reset(play_score_sound=True)
+            self.ball.reset(score_sound=self.score_sound)
         elif self.ball.x >= self.width:
             self.player_score += 1
-            self.ball.reset(play_score_sound=True)
+            self.ball.reset(score_sound=self.score_sound)
 
         self.ai.auto_track(self.ball, self.height)
 
@@ -113,6 +129,6 @@ class GameEngine:
     def reset_game(self):
         self.player_score = 0
         self.ai_score = 0
-        self.ball.reset(play_score_sound=False)
+        self.ball.reset(score_sound=None)
         self.player.y = self.height // 2 - self.paddle_height // 2
         self.ai.y = self.height // 2 - self.paddle_height // 2

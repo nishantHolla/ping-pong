@@ -1,15 +1,5 @@
 import pygame
 import random
-import os
-
-# Load sound effects
-paddle_hit_sound = pygame.mixer.Sound(
-    os.path.join("assets", "sounds", "paddle_hit.wav")
-)
-wall_bounce_sound = pygame.mixer.Sound(
-    os.path.join("assets", "sounds", "wall_bounce.wav")
-)
-score_sound = pygame.mixer.Sound(os.path.join("assets", "sounds", "score.wav"))
 
 
 class Ball:
@@ -25,7 +15,7 @@ class Ball:
         self.velocity_x = random.choice([-5, 5])
         self.velocity_y = random.choice([-3, 3])
 
-    def move(self, player=None, ai=None):
+    def move(self, player=None, ai=None, wall_bounce_sound=None, paddle_hit_sound=None):
         # Update ball position
         self.x += self.velocity_x
         self.y += self.velocity_y
@@ -33,29 +23,33 @@ class Ball:
         # Bounce off top/bottom
         if self.y <= 0 or self.y + self.height >= self.screen_height:
             self.velocity_y *= -1
-            wall_bounce_sound.play()
+            if wall_bounce_sound:
+                wall_bounce_sound.play()
 
         # Check paddle collisions immediately after movement
         if player and self.rect().colliderect(player.rect()):
             self.x = player.x + player.width  # prevent overlap
             self.velocity_x *= -1
-            paddle_hit_sound.play()
+            if paddle_hit_sound:
+                paddle_hit_sound.play()
+
         elif ai and self.rect().colliderect(ai.rect()):
             self.x = ai.x - self.width
             self.velocity_x *= -1
-            paddle_hit_sound.play()
+            if paddle_hit_sound:
+                paddle_hit_sound.play()
 
     def check_collision(self, player, ai):
         if self.rect().colliderect(player.rect()) or self.rect().colliderect(ai.rect()):
             self.velocity_x *= -1
 
-    def reset(self, play_score_sound=False):
+    def reset(self, score_sound=None):
         self.x = self.original_x
         self.y = self.original_y
         self.velocity_x *= -1
         self.velocity_y = random.choice([-3, 3])
 
-        if play_score_sound:
+        if score_sound:
             score_sound.play()
 
     def rect(self):
