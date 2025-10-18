@@ -39,10 +39,10 @@ class GameEngine:
 
         if self.ball.x <= 0:
             self.ai_score += 1
-            self.ball.reset()
+            self.ball.reset(play_score_sound=True)
         elif self.ball.x >= self.width:
             self.player_score += 1
-            self.ball.reset()
+            self.ball.reset(play_score_sound=True)
 
         self.ai.auto_track(self.ball, self.height)
 
@@ -113,6 +113,6 @@ class GameEngine:
     def reset_game(self):
         self.player_score = 0
         self.ai_score = 0
-        self.ball.reset()
+        self.ball.reset(play_score_sound=False)
         self.player.y = self.height // 2 - self.paddle_height // 2
         self.ai.y = self.height // 2 - self.paddle_height // 2
