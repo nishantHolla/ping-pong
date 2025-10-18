@@ -25,13 +25,10 @@ engine = GameEngine(WIDTH, HEIGHT)
 
 
 def main():
-    running = True
-    while running:
+    while engine.is_running():
         SCREEN.fill(BLACK)
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
 
+        engine.poll_events()
         engine.handle_input()
         engine.update()
         engine.render(SCREEN)
